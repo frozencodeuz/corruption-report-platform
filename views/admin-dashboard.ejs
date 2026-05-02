@@ -1,0 +1,86 @@
+<%- include('layout', { title, body: `
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <span class="sidebar-logo">!</span>
+      <div><b>Назорат панели</b><small>${h(adminUsername)}</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="active" href="/admin">Хабарлар реестри</a>
+      <a href="/admin/export.csv">CSV экспорт</a>
+      <a href="/" target="_blank">Оммавий саҳифа</a>
+    </nav>
+    <form action="/admin/logout" method="post" class="sidebar-bottom">
+      <button type="submit">Тизимдан чиқиш</button>
+    </form>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-top">
+      <div>
+        <span class="admin-kicker">Коррупцион ҳолатлар мониторинги</span>
+        <h1>Келган хабарлар реестри</h1>
+        <p>Хабарларни қидириш, фильтрлаш, кўриш, статусини ўзгартириш ва экспорт қилиш.</p>
+      </div>
+      <a class="btn btn-primary" href="/admin/export.csv?status=${encodeURIComponent(filters.status)}&q=${encodeURIComponent(filters.q)}&priority=${encodeURIComponent(filters.priority)}&from=${encodeURIComponent(filters.from)}&to=${encodeURIComponent(filters.to)}">CSV экспорт</a>
+    </header>
+
+    <section class="admin-stats">
+      <a href="/admin" class="stat-card"><span>Жами</span><b>${counts.total || 0}</b><small>барча хабарлар</small></a>
+      <a href="/admin?status=new" class="stat-card stat-new"><span>Янги</span><b>${counts.new || 0}</b><small>кўриб чиқилмаган</small></a>
+      <a href="/admin?status=reviewing" class="stat-card stat-reviewing"><span>Ижрода</span><b>${counts.reviewing || 0}</b><small>ўрганилмоқда</small></a>
+      <a href="/admin?priority=urgent" class="stat-card stat-urgent"><span>Тезкор</span><b>${counts.urgent || 0}</b><small>юқори муҳимлик</small></a>
+      <a href="/admin?status=closed" class="stat-card stat-closed"><span>Ёпилган</span><b>${counts.closed || 0}</b><small>якунланган</small></a>
+    </section>
+
+    <section class="filter-card">
+      <form method="get" action="/admin" class="admin-filters">
+        <label><span>Қидириш</span><input name="q" value="${h(filters.q)}" placeholder="ID, телефон, жой, матн ёки изоҳ"></label>
+        <label><span>Статус</span><select name="status"><option value="" ${!filters.status ? 'selected' : ''}>Барчаси</option>${Object.entries(STATUSES).map(([key, meta]) => `<option value="${key}" ${filters.status === key ? 'selected' : ''}>${h(meta.label)}</option>`).join('')}</select></label>
+        <label><span>Муҳимлик</span><select name="priority"><option value="" ${!filters.priority ? 'selected' : ''}>Барчаси</option>${Object.entries(PRIORITIES).map(([key, label]) => `<option value="${key}" ${filters.priority === key ? 'selected' : ''}>${h(label)}</option>`).join('')}</select></label>
+        <label><span>Санадан</span><input type="date" name="from" value="${h(filters.from)}"></label>
+        <label><span>Санагача</span><input type="date" name="to" value="${h(filters.to)}"></label>
+        <button type="submit" class="filter-submit">Фильтрлаш</button>
+      </form>
+    </section>
+
+    <section class="registry-card">
+      <div class="registry-head">
+        <div><h2>Хабарлар рўйхати</h2><p>${reports.length} та натижа кўрсатилмоқда</p></div>
+      </div>
+      <div class="table-scroll">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Вақт</th>
+              <th>Телефон</th>
+              <th>Ҳолат тури</th>
+              <th>Жой</th>
+              <th>Файл</th>
+              <th>Муҳимлик</th>
+              <th>Статус</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${reports.length ? reports.map(r => `
+              <tr>
+                <td><b class="mono">${h(r.id)}</b></td>
+                <td><span class="muted-text">${h(r.created_at)}</span></td>
+                <td>${h(r.phone_display)}</td>
+                <td>${h(r.incident_type_label)}</td>
+                <td><span class="place-cell">${h(r.place)}</span></td>
+                <td><span class="file-count">${r.file_count || 0}</span></td>
+                <td><span class="priority-pill ${h(r.priority || 'normal')}">${h(r.priority_label)}</span></td>
+                <td><span class="status-pill ${h(r.status)}">${h(r.status_label)}</span></td>
+                <td><a class="row-action" href="/admin/reports/${encodeURIComponent(r.id)}">Кўриш</a></td>
+              </tr>
+            `).join('') : `<tr><td colspan="9" class="empty-row">Ҳозирча хабар йўқ.</td></tr>`}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+` }) %>

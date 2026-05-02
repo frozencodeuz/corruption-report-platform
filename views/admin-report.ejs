@@ -1,0 +1,82 @@
+<%- include('layout', { title, body: `
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <span class="sidebar-logo">!</span>
+      <div><b>Хабар варақаси</b><small>${h(adminUsername)}</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/admin">← Реестрга қайтиш</a>
+      <a href="/admin/export.csv">CSV экспорт</a>
+      <a href="/" target="_blank">Оммавий саҳифа</a>
+    </nav>
+    <form action="/admin/logout" method="post" class="sidebar-bottom">
+      <button type="submit">Тизимдан чиқиш</button>
+    </form>
+  </aside>
+
+  <main class="admin-main">
+    <header class="report-top-card">
+      <div>
+        <span class="admin-kicker">Хабар рақами</span>
+        <h1 class="mono">${h(report.id)}</h1>
+        <p>${h(report.incident_type_label)} · ${h(report.created_at)}</p>
+      </div>
+      <div class="report-top-actions">
+        <span class="status-pill ${h(report.status)}">${h(report.status_label)}</span>
+        <span class="priority-pill ${h(report.priority || 'normal')}">${h(report.priority_label)}</span>
+      </div>
+    </header>
+
+    <section class="detail-grid">
+      <article class="detail-card">
+        <h2>Асосий маълумотлар</h2>
+        <dl class="info-list">
+          <div><dt>Телефон</dt><dd>${h(report.phone_display)}</dd></div>
+          <div><dt>Ҳолат тури</dt><dd>${h(report.incident_type_label)}</dd></div>
+          <div><dt>Ҳолат жойи</dt><dd>${h(report.place)}</dd></div>
+          <div><dt>Ҳодиса санаси</dt><dd>${h(report.event_date || 'Кўрсатилмаган')}</dd></div>
+          <div><dt>Яратилган</dt><dd>${h(report.created_at)}</dd></div>
+          <div><dt>Янгиланган</dt><dd>${h(report.updated_at)}</dd></div>
+        </dl>
+      </article>
+
+      <article class="detail-card">
+        <h2>Статусни янгилаш</h2>
+        <form action="/admin/reports/${encodeURIComponent(report.id)}/update" method="post" class="update-form">
+          <label><span>Статус</span><select name="status">${Object.entries(STATUSES).map(([key, meta]) => `<option value="${key}" ${report.status === key ? 'selected' : ''}>${h(meta.label)}</option>`).join('')}</select></label>
+          <label><span>Муҳимлик даражаси</span><select name="priority">${Object.entries(PRIORITIES).map(([key, label]) => `<option value="${key}" ${(report.priority || 'normal') === key ? 'selected' : ''}>${h(label)}</option>`).join('')}</select></label>
+          <label><span>Масъул ходим</span><input name="responsible_person" value="${h(report.responsible_person || '')}" placeholder="Масалан: Бош мутахассис"></label>
+          <label><span>Ички изоҳ</span><textarea name="admin_note" rows="5" placeholder="Фақат админ панелда кўринади">${h(report.admin_note || '')}</textarea></label>
+          <button class="btn btn-primary submit-btn" type="submit">Ўзгаришларни сақлаш</button>
+        </form>
+      </article>
+    </section>
+
+    <section class="detail-card full-card">
+      <h2>Хабар мазмуни</h2>
+      <div class="message-box">${nl2br(report.message)}</div>
+    </section>
+
+    <section class="detail-card full-card">
+      <h2>Илова қилинган файллар</h2>
+      ${files.length ? `<div class="files-grid">${files.map(f => `
+        <a class="evidence-card" href="/admin/files/${encodeURIComponent(f.filename)}" target="_blank" rel="noopener">
+          <span>${String(f.mimetype || '').startsWith('image/') ? '🖼️' : String(f.mimetype || '').startsWith('video/') ? '🎥' : '📄'}</span>
+          <div><b>${h(f.original_name)}</b><small>${h(f.mimetype)} · ${(Number(f.size || 0) / 1024 / 1024).toFixed(2)} MB</small></div>
+        </a>
+      `).join('')}</div>` : `<p class="muted-text">Файл илова қилинмаган.</p>`}
+    </section>
+
+    <section class="detail-card full-card">
+      <h2>Ҳаракатлар тарихи</h2>
+      ${logs.length ? `<div class="timeline">${logs.map(log => `
+        <div class="timeline-item">
+          <span></span>
+          <div><b>${h(log.details)}</b><small>${h(log.created_at)} · ${h(log.admin)}</small></div>
+        </div>
+      `).join('')}</div>` : `<p class="muted-text">Ҳаракатлар тарихи йўқ.</p>`}
+    </section>
+  </main>
+</div>
+` }) %>

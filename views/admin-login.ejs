@@ -1,0 +1,17 @@
+<%- include('layout', { title, body: `
+<div class="login-page">
+  <form class="login-card" action="/admin/login" method="post">
+    <a href="/" class="login-brand">
+      <span class="gov-emblem"><svg viewBox="0 0 32 32"><path d="M16 2.8 27 7.6v8.2c0 6.8-4.55 12.5-11 13.9C9.55 28.3 5 22.6 5 15.8V7.6l11-4.8Z" fill="none" stroke="currentColor" stroke-width="2.1"/></svg></span>
+      <span><b>Назорат панели</b><small>Коррупцион хабарлар мониторинги</small></span>
+    </a>
+    <h1>Тизимга кириш</h1>
+    <p>Фақат масъул ходимлар учун мўлжалланган ички панел.</p>
+    ${error ? `<div class="alert error">${h(error)}</div>` : ''}
+    <label><span>Логин</span><input name="username" type="text" required autocomplete="username" autofocus></label>
+    <label><span>Пароль</span><input name="password" type="password" required autocomplete="current-password"></label>
+    <button class="btn btn-primary submit-btn" type="submit">Кириш</button>
+    <a class="simple-link" href="/">← Асосий саҳифага қайтиш</a>
+  </form>
+</div>
+` }) %>
