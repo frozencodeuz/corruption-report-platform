@@ -2,16 +2,39 @@
 <div class="admin-layout">
   <aside class="admin-sidebar">
     <div class="sidebar-brand">
-      <span class="sidebar-logo">!</span>
-      <div><b>Хабар варақаси</b><small>${h(adminUsername)}</small></div>
+      <span class="sidebar-logo">⚑</span>
+      <div><b>Хабар варақаси</b><small>Мониторинг тизими</small></div>
     </div>
+
+    <div class="sidebar-section-label">Навигация</div>
     <nav class="sidebar-nav">
-      <a href="/admin">← Реестрга қайтиш</a>
-      <a href="/admin/export.csv">CSV экспорт</a>
-      <a href="/" target="_blank">Оммавий саҳифа</a>
+      <a href="/admin">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l-7 7"/><path d="m18 18-7-7"/></svg>
+        Реестрга қайтиш
+      </a>
+      <a href="/admin/export.csv">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1M7 10l3 3 3-3M10 13V3"/></svg>
+        CSV Экспорт
+      </a>
+      <a href="/" target="_blank">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M3.5 10h13M10 3.5a10 10 0 0 1 0 13M10 3.5a10 10 0 0 0 0 13"/></svg>
+        Оммавий саҳифа
+      </a>
     </nav>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">${h(adminUsername).charAt(0).toUpperCase()}</div>
+      <div class="sidebar-user-info">
+        <b>${h(adminUsername)}</b>
+        <small>Администратор</small>
+      </div>
+    </div>
+
     <form action="/admin/logout" method="post" class="sidebar-bottom">
-      <button type="submit">Тизимдан чиқиш</button>
+      <button type="submit">
+        <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10H3m10 0-3-3m3 3-3 3M8 5V3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2"/></svg>
+        Тизимдан чиқиш
+      </button>
     </form>
   </aside>
 
@@ -19,63 +42,132 @@
     <header class="report-top-card">
       <div>
         <span class="admin-kicker">Хабар рақами</span>
-        <h1 class="mono">${h(report.id)}</h1>
-        <p>${h(report.incident_type_label)} · ${h(report.created_at)}</p>
+        <h1 class="mono" style="font-size:22px;margin-top:8px">${h(report.id)}</h1>
+        <p>${h(report.incident_type_label)} &nbsp;·&nbsp; ${h(report.created_at)}</p>
       </div>
       <div class="report-top-actions">
-        <span class="status-pill ${h(report.status)}">${h(report.status_label)}</span>
-        <span class="priority-pill ${h(report.priority || 'normal')}">${h(report.priority_label)}</span>
+        <span class="status-pill ${h(report.status)}" style="padding:6px 14px;font-size:12.5px">${h(report.status_label)}</span>
+        <span class="priority-pill ${h(report.priority || 'normal')}" style="padding:6px 14px;font-size:12.5px">${h(report.priority_label)}</span>
+        <a href="/admin" class="btn" style="background:#f1f5f9;color:var(--dark-3);font-size:13.5px;padding:10px 18px;box-shadow:none;border:1px solid var(--line)">← Реестр</a>
       </div>
     </header>
 
     <section class="detail-grid">
+      <!-- Left: Basic info -->
       <article class="detail-card">
         <h2>Асосий маълумотлар</h2>
         <dl class="info-list">
-          <div><dt>Телефон</dt><dd>${h(report.phone_display)}</dd></div>
-          <div><dt>Ҳолат тури</dt><dd>${h(report.incident_type_label)}</dd></div>
-          <div><dt>Ҳолат жойи</dt><dd>${h(report.place)}</dd></div>
-          <div><dt>Ҳодиса санаси</dt><dd>${h(report.event_date || 'Кўрсатилмаган')}</dd></div>
-          <div><dt>Яратилган</dt><dd>${h(report.created_at)}</dd></div>
-          <div><dt>Янгиланган</dt><dd>${h(report.updated_at)}</dd></div>
+          <div>
+            <dt>Телефон рақам</dt>
+            <dd>${h(report.phone_display)}</dd>
+          </div>
+          <div>
+            <dt>Ҳолат тури</dt>
+            <dd>${h(report.incident_type_label)}</dd>
+          </div>
+          <div>
+            <dt>Ҳолат содир бўлган жой</dt>
+            <dd>${h(report.place)}</dd>
+          </div>
+          <div>
+            <dt>Ҳодиса санаси</dt>
+            <dd>${h(report.event_date || '— Кўрсатилмаган')}</dd>
+          </div>
+          <div>
+            <dt>Яратилган вақт</dt>
+            <dd class="mono" style="font-size:13px">${h(report.created_at)}</dd>
+          </div>
+          <div>
+            <dt>Сўнгги янгиланган</dt>
+            <dd class="mono" style="font-size:13px">${h(report.updated_at)}</dd>
+          </div>
         </dl>
       </article>
 
+      <!-- Right: Status update form -->
       <article class="detail-card">
         <h2>Статусни янгилаш</h2>
         <form action="/admin/reports/${encodeURIComponent(report.id)}/update" method="post" class="update-form">
-          <label><span>Статус</span><select name="status">${Object.entries(STATUSES).map(([key, meta]) => `<option value="${key}" ${report.status === key ? 'selected' : ''}>${h(meta.label)}</option>`).join('')}</select></label>
-          <label><span>Муҳимлик даражаси</span><select name="priority">${Object.entries(PRIORITIES).map(([key, label]) => `<option value="${key}" ${(report.priority || 'normal') === key ? 'selected' : ''}>${h(label)}</option>`).join('')}</select></label>
-          <label><span>Масъул ходим</span><input name="responsible_person" value="${h(report.responsible_person || '')}" placeholder="Масалан: Бош мутахассис"></label>
-          <label><span>Ички изоҳ</span><textarea name="admin_note" rows="5" placeholder="Фақат админ панелда кўринади">${h(report.admin_note || '')}</textarea></label>
-          <button class="btn btn-primary submit-btn" type="submit">Ўзгаришларни сақлаш</button>
+          <label>
+            <span>Статус</span>
+            <select name="status">
+              ${Object.entries(STATUSES).map(([key, meta]) => `<option value="${key}" ${report.status === key ? 'selected' : ''}>${h(meta.label)}</option>`).join('')}
+            </select>
+          </label>
+          <label>
+            <span>Муҳимлик даражаси</span>
+            <select name="priority">
+              ${Object.entries(PRIORITIES).map(([key, label]) => `<option value="${key}" ${(report.priority || 'normal') === key ? 'selected' : ''}>${h(label)}</option>`).join('')}
+            </select>
+          </label>
+          <label>
+            <span>Масъул ходим</span>
+            <input name="responsible_person" value="${h(report.responsible_person || '')}" placeholder="Масалан: Бош мутахассис Каримов А.">
+          </label>
+          <label>
+            <span>Ички изоҳ (фақат админ панелда кўринади)</span>
+            <textarea name="admin_note" rows="5" placeholder="Текшируv натижалари, таклифлар ёки қўшимча изоҳ...">${h(report.admin_note || '')}</textarea>
+          </label>
+          <button class="btn btn-primary submit-btn" type="submit" style="margin-top:4px">
+            <svg style="width:16px;height:16px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3H3v14l14-14z"/><path d="M17 3v14H7"/></svg>
+            Ўзгаришларни сақлаш
+          </button>
         </form>
       </article>
     </section>
 
+    <!-- Message content -->
     <section class="detail-card full-card">
       <h2>Хабар мазмуни</h2>
       <div class="message-box">${nl2br(report.message)}</div>
     </section>
 
+    <!-- Attached files -->
     <section class="detail-card full-card">
       <h2>Илова қилинган файллар</h2>
-      ${files.length ? `<div class="files-grid">${files.map(f => `
-        <a class="evidence-card" href="/admin/files/${encodeURIComponent(f.filename)}" target="_blank" rel="noopener">
-          <span>${String(f.mimetype || '').startsWith('image/') ? '🖼️' : String(f.mimetype || '').startsWith('video/') ? '🎥' : '📄'}</span>
-          <div><b>${h(f.original_name)}</b><small>${h(f.mimetype)} · ${(Number(f.size || 0) / 1024 / 1024).toFixed(2)} MB</small></div>
-        </a>
-      `).join('')}</div>` : `<p class="muted-text">Файл илова қилинмаган.</p>`}
+      ${files.length ? `
+        <div class="files-grid">
+          ${files.map(f => `
+            <a class="evidence-card" href="/admin/files/${encodeURIComponent(f.filename)}" target="_blank" rel="noopener">
+              <span>
+                ${String(f.mimetype || '').startsWith('image/') ? '🖼️' : String(f.mimetype || '').startsWith('video/') ? '🎥' : '📄'}
+              </span>
+              <div style="min-width:0">
+                <b>${h(f.original_name)}</b>
+                <small>${h(f.mimetype)} &nbsp;·&nbsp; ${(Number(f.size || 0) / 1024 / 1024).toFixed(2)} MB</small>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      ` : `
+        <div style="display:flex;align-items:center;gap:12px;padding:20px;background:#f8fafc;border-radius:12px;border:1.5px dashed #dde3ed">
+          <span style="font-size:28px">📎</span>
+          <p style="margin:0;color:var(--muted);font-size:14px;font-weight:500">Файл илова қилинмаган.</p>
+        </div>
+      `}
     </section>
 
+    <!-- Activity log / Timeline -->
     <section class="detail-card full-card">
       <h2>Ҳаракатлар тарихи</h2>
-      ${logs.length ? `<div class="timeline">${logs.map(log => `
-        <div class="timeline-item">
-          <span></span>
-          <div><b>${h(log.details)}</b><small>${h(log.created_at)} · ${h(log.admin)}</small></div>
+      ${logs.length ? `
+        <div class="timeline">
+          ${logs.map(log => `
+            <div class="timeline-item">
+              <span></span>
+              <div>
+                <b>${h(log.details)}</b>
+                <small>${h(log.created_at)} &nbsp;·&nbsp; ${h(log.admin)}</small>
+              </div>
+            </div>
+          `).join('')}
         </div>
-      `).join('')}</div>` : `<p class="muted-text">Ҳаракатлар тарихи йўқ.</p>`}
+      ` : `
+        <div style="display:flex;align-items:center;gap:12px;padding:20px;background:#f8fafc;border-radius:12px;border:1.5px dashed #dde3ed">
+          <span style="font-size:28px">📋</span>
+          <p style="margin:0;color:var(--muted);font-size:14px;font-weight:500">Ҳаракатлар тарихи йўқ.</p>
+        </div>
+      `}
     </section>
   </main>
 </div>

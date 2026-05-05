@@ -3,18 +3,35 @@
   <div class="success-card">
     <div class="success-mark">✓</div>
     <h1>Хабарингиз қабул қилинди</h1>
-    <p>Коррупцион ҳолат бўйича хабарингиз масъуллар томонидан белгиланган тартибда ўрганилади.</p>
+    <p>Коррупцион ҳолат бўйича хабарингиз масъуллар томонидан белгиланган тартибда кўриб чиқилади ва зарур чоралар кўрилади.</p>
+
     <div class="receipt-box">
-      <span>Хабар рақами</span>
+      <span>Хабар рақами (сақлаб олинг)</span>
       <b>${h(report.id)}</b>
     </div>
+
     <div class="success-info">
-      <div><b>Статус</b><span>${h(report.status_label)}</span></div>
-      <div><b>Қабул қилинган вақт</b><span>${h(report.created_at)}</span></div>
-      <div><b>Ҳолат тури</b><span>${h(report.incident_type_label)}</span></div>
+      <div>
+        <b>Статус</b>
+        <span>${h(report.status_label)}</span>
+      </div>
+      <div>
+        <b>Қабул вақти</b>
+        <span>${h(report.created_at)}</span>
+      </div>
+      <div>
+        <b>Ҳолат тури</b>
+        <span>${h(report.incident_type_label)}</span>
+      </div>
     </div>
-    <div class="notice-blue">🔒 Шахсингиз сир сақланади. Зарур ҳолларда масъуллар телефон рақам орқали боғланиши мумкин.</div>
-    <a class="btn btn-primary" href="/">Яна хабар юбориш</a>
+
+    <div class="notice-blue">
+      🔒 Шахсингиз сир сақланади. Зарур ҳолларда масъуллар телефон рақам орқали боғланиши мумкин.
+    </div>
+
+    <a class="btn btn-primary" href="/" style="width:100%;justify-content:center">
+      ← Яна хабар юбориш
+    </a>
   </div>
 </div>
 ` }) %>

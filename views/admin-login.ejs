@@ -2,15 +2,38 @@
 <div class="login-page">
   <form class="login-card" action="/admin/login" method="post">
     <a href="/" class="login-brand">
-      <span class="gov-emblem"><svg viewBox="0 0 32 32"><path d="M16 2.8 27 7.6v8.2c0 6.8-4.55 12.5-11 13.9C9.55 28.3 5 22.6 5 15.8V7.6l11-4.8Z" fill="none" stroke="currentColor" stroke-width="2.1"/></svg></span>
-      <span><b>Назорат панели</b><small>Коррупцион хабарлар мониторинги</small></span>
+      <span class="gov-emblem">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M16 2.8 27 7.6v8.2c0 6.8-4.55 12.5-11 13.9C9.55 28.3 5 22.6 5 15.8V7.6l11-4.8Z" stroke="currentColor" stroke-width="2.1"/>
+          <path d="M16 9.4v8.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M16 22.2h.01" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>
+        <b>Назорат панели</b>
+        <small>Коррупцион хабарлар мониторинги</small>
+      </span>
     </a>
+
     <h1>Тизимга кириш</h1>
-    <p>Фақат масъул ходимлар учун мўлжалланган ички панел.</p>
+    <p>Фақат масъул ходимлар учун мўлжалланган ички панел</p>
+
     ${error ? `<div class="alert error">${h(error)}</div>` : ''}
-    <label><span>Логин</span><input name="username" type="text" required autocomplete="username" autofocus></label>
-    <label><span>Пароль</span><input name="password" type="password" required autocomplete="current-password"></label>
-    <button class="btn btn-primary submit-btn" type="submit">Кириш</button>
+
+    <label>
+      <span>Логин</span>
+      <input name="username" type="text" required autocomplete="username" autofocus placeholder="Фойдаланувчи номи">
+    </label>
+    <label>
+      <span>Пароль</span>
+      <input name="password" type="password" required autocomplete="current-password" placeholder="••••••••">
+    </label>
+
+    <button class="btn btn-primary submit-btn" type="submit" style="margin-top:6px">
+      <svg style="width:16px;height:16px" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10H5m10 0-3-3m3 3-3 3M10 17v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v2"/></svg>
+      Кириш
+    </button>
+
     <a class="simple-link" href="/">← Асосий саҳифага қайтиш</a>
   </form>
 </div>

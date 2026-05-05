@@ -1,31 +1,22 @@
-<%- include('layout', { title, body: `
-<div class="public-page">
-  <div class="top-government-bar">
-    <div class="container topbar-inner">
-      <span>Ягона онлайн қабул платформаси</span>
-      <span class="topbar-sep"></span>
-      <span>Коррупцияга қарши курашиш бўйича аноним хабар</span>
-      <a href="/admin" class="topbar-admin">Админ панел</a>
-    </div>
-  </div>
+<%- include('layout', { title, body: ` <div class="public-page">
 
   <header class="gov-header">
     <div class="container gov-header-inner">
       <a href="/" class="gov-brand" aria-label="Асосий саҳифа">
         <span class="gov-emblem" aria-hidden="true">
-          <svg viewBox="0 0 32 32"><path d="M16 2.8 27 7.6v8.2c0 6.8-4.55 12.5-11 13.9C9.55 28.3 5 22.6 5 15.8V7.6l11-4.8Z" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M16 9.4v8.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M16 22.2h.01" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 32 32">
+            <path d="M16 2.8 27 7.6v8.2c0 6.8-4.55 12.5-11 13.9C9.55 28.3 5 22.6 5 15.8V7.6l11-4.8Z" fill="none"
+              stroke="currentColor" stroke-width="2.1" />
+            <path d="M16 9.4v8.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+            <path d="M16 22.2h.01" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+          </svg>
         </span>
         <span>
           <strong>Коррупцион ҳолатлар бўйича хабар бериш</strong>
           <small>Расмий, хавфсиз ва аноним веб-қабулхона</small>
         </span>
       </a>
-      <nav class="gov-nav" aria-label="Саҳифа бўлимлари">
-        <a href="#guarantee">Кафолатлар</a>
-        <a href="#steps">Жараён</a>
-        <a href="#report">Хабар юбориш</a>
-      </nav>
-      <a class="gov-login" href="/admin">Тизимга кириш</a>
+      </a>
     </div>
   </header>
 
@@ -35,148 +26,140 @@
         <div class="hero-content">
           <div class="badge-line"><span></span> Анонимлик · Хавфсиз қабул · Масъул назорат</div>
           <h1>Коррупцион ҳолат ҳақида аниқ ва хавфсиз хабар беринг</h1>
-          <p class="hero-text">Пора, таъмагирлик, мансаб ваколатини суиистеъмол қилиш, сунъий тўсиқ ёки манфаатлар тўқнашуви ҳақида маълумот юборинг. Хабар берувчининг шахси сир сақланади.</p>
-          <div class="hero-actions">
-            <a href="#report" class="btn btn-primary">Хабар юбориш</a>
-            <a href="#steps" class="btn btn-ghost">Тартибни кўриш</a>
-          </div>
-          <div class="hero-note"><b>Муҳим:</b> Ф.И.Ш, паспорт ва яшаш манзили сўралмайди. Фақат алоқа учун телефон рақам мажбурий.</div>
+          <p class="hero-text">Пора, таъмагирлик, мансаб ваколатини суиистеъмол қилиш, сунъий тўсиқ ёки манфаатлар
+            тўқнашуви ҳақида маълумот юборинг. Хабар берувчининг шахси сир сақланади.</p>
+
+          <div class="hero-note"><b>Муҳим:</b> Ф.И.Ш, паспорт ва яшаш манзили сўралмайди. Фақат алоқа учун телефон рақам
+            мажбурий.</div>
         </div>
 
-        <aside class="hero-panel" aria-label="Платформа маълумоти">
-          <div class="panel-head">
-            <span class="panel-icon">🔒</span>
-            <div><b>Аноним хабар режими</b><small>шахсий маълумотлар минимал</small></div>
+        <div class="mobile-form-intro">
+          <span class="mfi-icon">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1">
+              <path d="M16 2.8 27 7.6v8.2c0 6.8-4.55 12.5-11 13.9C9.55 28.3 5 22.6 5 15.8V7.6l11-4.8Z" />
+              <path d="M16 9.4v8.1" stroke-width="2.4" stroke-linecap="round" />
+              <path d="M16 22.2h.01" stroke-width="3.4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="mfi-text">
+            <strong>Коррупцион ҳолат ҳақида хабар</strong>
+            <small>Аноним · Хавфсиз · Расмий қабул</small>
+          </span>
+          <span class="mfi-badge">🔒 Аноним</span>
+        </div>
+
+        <form class="report-form hero-form" action="/submit" method="post" enctype="multipart/form-data" novalidate>
+          <div class="form-header">
+            <div>
+              <h2>Хабар маълумотлари</h2>
+              <p>Юлдузча (*) билан белгиланган майдонлар мажбурий.</p>
+            </div>
+            <span>Аноним</span>
           </div>
-          <div class="panel-list">
-            <div><span>01</span><p>Ҳолат ҳақида қисқа ва аниқ маълумот киритилади</p></div>
-            <div><span>02</span><p>Расм, видео ёки PDF файллар исбот сифатида илова қилинади</p></div>
-            <div><span>03</span><p>Хабар махсус админ панелда статуслар орқали назорат қилинади</p></div>
+
+          ${error ? `<div class="alert error">${h(error)}</div>` : ''}
+
+          <div class="form-grid-two">
+            <label>
+              <span>Телефон рақам *</span>
+              <input name="phone" type="tel" required inputmode="tel" placeholder="+998 90 123 45 67"
+                value="${h(old.phone || '')}">
+            </label>
+            <label>
+              <span>Ҳолат тури *</span>
+              <select name="incident_type" required>
+                ${Object.entries(INCIDENT_TYPES).map(([key, label]) => `<option value="${key}" ${old.incident_type===key
+                  ? 'selected' : '' }>${h(label)}</option>`).join('')}
+              </select>
+            </label>
+            <label>
+              <span>Ҳолат содир бўлган сана</span>
+              <input name="event_date" type="date" value="${h(old.event_date || '')}">
+            </label>
+            <label>
+              <span>Ҳолат содир бўлган жой *</span>
+              <input name="place" type="text" required placeholder="Ташкилот, маҳалла ёки идора"
+                value="${h(old.place || '')}">
+            </label>
           </div>
-          <div class="panel-metrics">
-            <div><b>${MAX_FILES}</b><span>та файлгача</span></div>
-            <div><b>${MAX_FILE_MB}</b><span>MB гача</span></div>
-            <div><b>ID</b><span>рақам берилади</span></div>
-          </div>
-        </aside>
+
+          <label>
+            <span>Ҳолат мазмуни *</span>
+            <textarea name="message" required minlength="30" rows="2"
+              placeholder="Ҳолат қаерда, қачон, кимлар иштирокида ва қандай содир бўлганини батафсил ёзинг.">${h(old.message || '')}</textarea>
+          </label>
+
+          <label class="file-dropzone" style="padding: 18px !important;">
+            <input name="evidence" type="file" multiple accept="image/*,video/*,application/pdf">
+            <div style="display:flex; align-items:center; justify-content:center; gap: 12px;">
+              <span class="file-icon" style="margin:0; width:36px; height:36px; font-size:24px;">＋</span>
+              <div style="text-align:left;">
+                <b style="display:block;">Исбот файлларини илова қилиш</b>
+                <small style="margin-top:2px;">JPG, PNG, PDF, MP4 · макс ${MAX_FILES} та</small>
+              </div>
+            </div>
+          </label>
+
+          <label class="check-row">
+            <input name="consent" type="checkbox" required ${old.consent ? 'checked' : '' }>
+            <span>Юборилаётган маълумотлар холис, текширилган ва ҳақиқатга мос эканини тасдиқлайман.</span>
+          </label>
+
+          <button class="btn btn-primary submit-btn" type="submit">Хабарни хавфсиз юбориш</button>
+        </form>
       </div>
     </section>
 
-    <section id="guarantee" class="container guarantee-section">
-      <div class="section-title">
-        <span>Ишонч блоки</span>
-        <h2>Фуқаро учун содда, масъуллар учун назоратли тизим</h2>
-      </div>
-      <div class="guarantee-grid">
-        <article>
-          <i>🛡️</i>
-          <h3>Шахсингиз сир сақланади</h3>
-          <p>Хабар юборишда Ф.И.Ш, паспорт ва доимий манзил талаб қилинмайди.</p>
-        </article>
-        <article>
-          <i>📎</i>
-          <h3>Исбот файллари</h3>
-          <p>Зарур ҳолларда расм, видео, скриншот ёки PDF ҳужжат илова қилинади.</p>
-        </article>
-        <article>
-          <i>📋</i>
-          <h3>Ҳар бир хабарга ID</h3>
-          <p>Юборилган ҳар бир хабарга алоҳида рақам берилади ва базага сақланади.</p>
-        </article>
-        <article class="danger-card">
-          <i>⚖️</i>
-          <h3>Қонунчилик эслатмаси</h3>
-          <p>Ёлғон, туҳмат ёки асоссиз маълумот юбориш жавобгарликка сабаб бўлиши мумкин.</p>
-        </article>
-      </div>
-    </section>
 
-    <section id="steps" class="steps-band">
-      <div class="container">
-        <div class="section-title light-title">
-          <span>Хизматдан фойдаланиш тартиби</span>
-          <h2>Хабар юбориш жараёни 3 қадамдан иборат</h2>
-        </div>
-        <div class="steps-grid">
-          <div class="step-card"><span>1</span><h3>Маълумот киритинг</h3><p>Телефон рақам, ҳолат тури, жойи ва мазмунини ёзинг.</p></div>
-          <div class="step-card"><span>2</span><h3>Файл илова қилинг</h3><p>Исбот сифатида расм, видео ёки PDF файлларни қўшинг.</p></div>
-          <div class="step-card"><span>3</span><h3>Юборинг</h3><p>Хабарингиз масъуллар панелига тушади ва статус бўйича юритилади.</p></div>
-        </div>
-      </div>
-    </section>
 
     <section id="report" class="container report-wrap">
       <div class="report-side">
         <div class="section-title">
           <span>Онлайн форма</span>
           <h2>Коррупцион ҳолат бўйича аноним хабар</h2>
-          <p>Ҳолатни аниқ, холис ва текширилган фактлар асосида ёзинг. Имкон қадар сана, жой, ташкилот ва воқеа тафсилотларини кўрсатинг.</p>
+          <p>Ҳолатни аниқ, холис ва текширилган фактлар асосида ёзинг. Имкон қадар сана, жой, ташкилот ва воқеа
+            тафсилотларини кўрсатинг.</p>
         </div>
         <div class="info-box">
           <b>Нима учун телефон рақам сўралади?</b>
-          <p>Фақат ҳолатни аниқлаштириш зарурати туғилганда масъул ходим боғланиши учун. Ушбу маълумот очиқ эълон қилинмайди.</p>
+          <p>Фақат ҳолатни аниқлаштириш зарурати туғилганда масъул ходим боғланиши учун. Ушбу маълумот очиқ эълон
+            қилинмайди.</p>
         </div>
       </div>
 
-      <form class="report-form" action="/submit" method="post" enctype="multipart/form-data" novalidate>
-        <div class="form-header">
-          <div><h2>Хабар маълумотлари</h2><p>Юлдузча (*) билан белгиланган майдонлар мажбурий.</p></div>
-          <span>Аноним</span>
+      <aside class="hero-panel" aria-label="Платформа маълумоти">
+        <div class="panel-head">
+          <span class="panel-icon">🔒</span>
+          <div><b>Аноним хабар режими</b><small>шахсий маълумотлар минимал</small></div>
         </div>
-
-        ${error ? `<div class="alert error">${h(error)}</div>` : ''}
-
-        <div class="form-grid-two">
-          <label>
-            <span>Телефон рақам *</span>
-            <input name="phone" type="tel" required inputmode="tel" placeholder="+998 90 123 45 67" value="${h(old.phone || '')}">
-          </label>
-          <label>
-            <span>Ҳолат содир бўлган сана</span>
-            <input name="event_date" type="date" value="${h(old.event_date || '')}">
-          </label>
+        <div class="panel-list">
+          <div><span>01</span>
+            <p>Ҳолат ҳақида қисқа ва аниқ маълумот киритилади</p>
+          </div>
+          <div><span>02</span>
+            <p>Расм, видео ёки PDF файллар исбот сифатида илова қилинади</p>
+          </div>
+          <div><span>03</span>
+            <p>Хабар махсус админ панелда статуслар орқали назорат қилинади</p>
+          </div>
         </div>
-
-        <label>
-          <span>Ҳолат тури *</span>
-          <select name="incident_type" required>
-            ${Object.entries(INCIDENT_TYPES).map(([key, label]) => `<option value="${key}" ${old.incident_type === key ? 'selected' : ''}>${h(label)}</option>`).join('')}
-          </select>
-        </label>
-
-        <label>
-          <span>Ҳолат содир бўлган жой *</span>
-          <input name="place" type="text" required placeholder="Ташкилот, маҳалла, идора ёки манзил" value="${h(old.place || '')}">
-        </label>
-
-        <label>
-          <span>Ҳолат мазмуни *</span>
-          <textarea name="message" required minlength="30" rows="8" placeholder="Ҳолат қаерда, қачон, кимлар иштирокида ва қандай содир бўлганини батафсил ёзинг.">${h(old.message || '')}</textarea>
-          <small class="field-help">Камида 30 белги. Аниқ фактлар ва тафсилотлар кўрсатилса, ўрганиш осонлашади.</small>
-        </label>
-
-        <label class="file-dropzone">
-          <input name="evidence" type="file" multiple accept="image/*,video/*,application/pdf">
-          <span class="file-icon">＋</span>
-          <b>Исбот файлларини илова қилиш</b>
-          <small>JPG, PNG, WEBP, GIF, MP4, MOV, WEBM ёки PDF · максимум ${MAX_FILES} та файл</small>
-        </label>
-
-        <label class="check-row">
-          <input name="consent" type="checkbox" required ${old.consent ? 'checked' : ''}>
-          <span>Юборилаётган маълумотлар холис, текширилган ва ҳақиқатга мос эканини тасдиқлайман.</span>
-        </label>
-
-        <button class="btn btn-primary submit-btn" type="submit">Хабарни хавфсиз юбориш</button>
-      </form>
+        <div class="panel-metrics">
+          <div><b>${MAX_FILES}</b><span>та файлгача</span></div>
+          <div><b>${MAX_FILE_MB}</b><span>MB гача</span></div>
+          <div><b>ID</b><span>рақам берилади</span></div>
+        </div>
+      </aside>
     </section>
   </main>
 
   <footer class="public-footer">
     <div class="container footer-inner">
       <span>Коррупцион ҳолатлар бўйича аноним хабар бериш платформаси</span>
-      <span>© ${new Date().getFullYear()}</span>
+      <div style="display:flex; gap:20px; align-items:center;">
+        <span>© ${new Date().getFullYear()}</span>
+        <a href="/admin" style="font-weight:900; color:var(--blue);">Тизимга кириш</a>
+      </div>
     </div>
   </footer>
-</div>
-` }) %>
+  </div>
+  ` }) %>
