@@ -1,16 +1,17 @@
 {
   "name": "corruption-report-platform",
-  "version": "2.0.0",
-  "description": "Anonymous corruption report web platform with official-style landing page and advanced admin panel",
+  "version": "2.1.0",
+  "description": "Anonymous corruption report web platform with official-style landing page and Supabase database/storage",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0 <26"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
